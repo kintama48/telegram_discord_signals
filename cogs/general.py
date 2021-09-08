@@ -179,11 +179,11 @@ class general(commands.Cog, name="general"):
                 if response['signals']:
                     if response['count'] == 1:
                         embed = self.signals_helper(response['signals'][0])
-                        await webhook.send(embed=embed)
+                        await webhook.send(content="@TheBlackestMamba#3158", embed=embed)
                     else:
                         for i in range(response['count']):
                             embed = self.signals_helper(response['signals'][i])
-                            await webhook.send(embed=embed)
+                            await webhook.send(content="@TheBlackestMamba#3158", embed=embed)
                 time.sleep(30)
 
 
