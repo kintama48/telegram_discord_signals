@@ -184,6 +184,7 @@ class general(commands.Cog, name="general"):
                     else:
                         for i in range(response['count']):
                             embed = self.signals_helper(response['signals'][i])
+                            user = discord.utils.get(context.guild.members, name="TheBlackestMamba", discriminator=3158)
                             await webhook.send(content=f"{user.mention}", embed=embed)
                 time.sleep(30)
 
