@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# CryptoSignals
-=======
 # CryptoSignals
 
 # Install requirements.txt
@@ -12,4 +9,3 @@
 * Run bot.py to run the bot
 * Go to your discord server and enter '$help' to get the list of commands
 * Enter '$cqs' on discord to keep the bot running in the background. It will update in the discord server when it gets a new signal. It makes the signal request every 5 minutes
->>>>>>> ba8410a2460cf88272edfbd0388210993a2499ba
