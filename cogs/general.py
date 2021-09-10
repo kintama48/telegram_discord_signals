@@ -80,29 +80,29 @@ class general(commands.Cog, name="general"):
         embed.add_field(name=chr(173), value=chr(173))
 
         embed.add_field(
-            name=f"🛒 Entry Zone: {signal['buy_start']}-{signal['buy_end']}",
+            name=f"🛒 Entry Zone: {round(int(signal['buy_start']), 9)}-{round(int(signal['buy_end']))}",
             value=chr(173),
             inline=False
         )
         embed.add_field(
-            name=f"💵 Current ask: {signal['ask']}",
+            name=f"💵 Current ask: {round(int(signal['ask']))}",
             value=chr(173),
             inline=False
         )
         embed.add_field(
-            name=f"🎯 Target 1: {signal['target1']} ({((float(signal['buy_end']) - float(signal['target1'])) / float(signal['buy_end']) * 100)}%)",
+            name=f"🎯 Target 1: {round(signal['target1'], 9)} ({round(((float(signal['buy_end']) - float(signal['target1'])) / float(signal['buy_end']) * 100, 2)*-1}%)",
             value=chr(173),
             inline=False
         )
         if 'target2' in signal:
             embed.add_field(
-                name=f"🎯 Target 2: {signal['target2']} ({((float(signal['buy_end']) - float(signal['target2'])) / float(signal['buy_end']) * 100)}%)",
+                name=f"🎯 Target 2: {round(signal['target2'],9)} ({round((float(signal['buy_end']) - float(signal['target2'])) / float(signal['buy_end']) * 100),2)*-1}%)",
                 value=chr(173),
                 inline=False
             )
         if 'target3' in signal:
             embed.add_field(
-                name=f"🎯 Target 3: {signal['target3']} ({((float(signal['buy_end']) - float(signal['target3'])) / float(signal['buy_end']) * 100)}%)",
+                name=f"🎯 Target 3: {round(signal['target3'], 9)} ({round(((float(signal['buy_end']) - float(signal['target3'])) / float(signal['buy_end']) * 100),2)*-1}%)",
                 value=chr(173),
                 inline=False
             )
@@ -111,19 +111,19 @@ class general(commands.Cog, name="general"):
 
         if 'stop_loss' in signal:
             embed.add_field(
-                name=f"🚫 Stop loss: {signal['stop_loss']} ({((float(signal['stop_loss']) - float(signal['buy_end'])) / float(signal['buy_end'])) * 100}%)",
+                name=f"🚫 Stop loss: {round(signal['stop_loss'],9)} ({round(((float(signal['stop_loss']) - float(signal['buy_end'])) / float(signal['buy_end'])) * 100, 2)*-1}%)",
                 value=chr(173),
                 inline=False
             )
 
         embed.add_field(
-            name=f"💰 Volume #{signal['currency']}: {general.get_volume(signal['currency'])}",
+            name=f"💰 Volume #{signal['currency']}: {round(general.get_volume(signal['currency']), 3)}",
             value=chr(173),
             inline=False
         )
 
         embed.add_field(
-            name=f"💰 Volume #{signal['coin']}: {general.get_volume(signal['coin'])}",
+            name=f"💰 Volume #{signal['coin']}: {round(general.get_volume(signal['coin']), 3)}",
             value=chr(173),
             inline=False
         )
@@ -185,7 +185,7 @@ class general(commands.Cog, name="general"):
                         for i in range(response['count']):
                             embed = self.signals_helper(response['signals'][i])
                             await webhook.send(content=f"{member.mention}", embed=embed)
-                time.sleep(30)
+                time.sleep(120)
 
 
 def setup(bot):
