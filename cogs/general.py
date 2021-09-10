@@ -90,13 +90,13 @@ class general(commands.Cog, name="general"):
             inline=False
         )
         embed.add_field(
-            name=f"🎯 Target 1: {round(signal['target1'], 9)} ({round(((float(signal['buy_end']) - float(signal['target1'])) / float(signal['buy_end']) * 100, 2)*-1}%)",
+            name=f"🎯 Target 1: {round(signal['target1'], 9)} ({round((float(signal['buy_end']) - float(signal['target1'])) / float(signal['buy_end']) * 100, 2)*-1}%)",
             value=chr(173),
             inline=False
         )
         if 'target2' in signal:
             embed.add_field(
-                name=f"🎯 Target 2: {round(signal['target2'],9)} ({round((float(signal['buy_end']) - float(signal['target2'])) / float(signal['buy_end']) * 100),2)*-1}%)",
+                name=f"🎯 Target 2: {round(signal['target2'], 9)} ({round((float(signal['buy_end']) - float(signal['target2'])) / float(signal['buy_end']) * 100, 2)*-1}%)", 
                 value=chr(173),
                 inline=False
             )
