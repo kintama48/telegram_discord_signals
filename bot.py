@@ -21,7 +21,6 @@ else:
 
 intents = discord.Intents.default()
 bot = Bot(command_prefix=config["bot_prefix"], intents=intents)
-user = await bot.fetch_user(691341448443985941)
 
 
 @bot.event
@@ -47,12 +46,12 @@ async def signals():
         if response['signals']:
             if response['count'] == 1:
                 embed = signals_helper(response['signals'][0])
-                await webhook.send(content=user.mention, embed=embed)
+                await webhook.send(content=(await bot.fetch_user(691341448443985941)).mention, embed=embed)
                 time.sleep(30)
             else:
                 for i in range(response['count']):
                     embed = signals_helper(response['signals'][i])
-                    await webhook.send(content=user.mention, embed=embed)
+                    await webhook.send(content=(await bot.fetch_user(691341448443985941)).mention, embed=embed)
                 time.sleep(30)
 
 
