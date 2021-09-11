@@ -32,7 +32,7 @@ async def on_ready():
 
 @tasks.loop(minutes=2)
 async def signals():
-    url = f"https://api.cryptoqualitysignals.com/v1/getSignal/?api_key=FREE&interval=3"
+    url = f"https://api.cryptoqualitysignals.com/v1/getSignal/?api_key=FREE&interval=20"
     async with aiohttp.ClientSession() as session:
         raw_response = await session.get(url)
         response = await raw_response.text()
