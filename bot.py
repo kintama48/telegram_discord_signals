@@ -2,6 +2,7 @@ import json
 import os
 import platform
 import sys
+import time
 from datetime import datetime
 
 import aiohttp
@@ -28,11 +29,12 @@ async def on_ready():
     print(f"Discord.py API version: {discord.__version__}")
     print(f"Python version: {platform.python_version()}")
     print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
+    signals.start()
 
 
-@tasks.loop(minutes=2)
+@tasks.loop(minutes=1)
 async def signals():
-    url = f"https://api.cryptoqualitysignals.com/v1/getSignal/?api_key=FREE&interval=20"
+    url = f"https://api.cryptoqualitysignals.com/v1/getSignal/?api_key=FREE&interval=1"
     async with aiohttp.ClientSession() as session:
         raw_response = await session.get(url)
         response = await raw_response.text()
@@ -40,16 +42,17 @@ async def signals():
         webhook = Webhook.from_url(
             "https://discord.com/api/webhooks/885086293002965012/M-y_kPF19bcEhfql0HaXfRhvaQdBEMFKLUKp3nztaR5ufRD_EhPnGJOAIBwtV8TW1YJd",
             adapter=RequestsWebhookAdapter())
-
         print(response)
         if response['signals']:
             if response['count'] == 1:
                 embed = signals_helper(response['signals'][0])
                 await webhook.send(content="@everyone", embed=embed)
+                time.sleep(30)
             else:
                 for i in range(response['count']):
                     embed = signals_helper(response['signals'][i])
                     await webhook.send(content="@everyone", embed=embed)
+                time.sleep(30)
 
 
 def convertTimeStamp(time):
