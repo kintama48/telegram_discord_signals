@@ -165,7 +165,7 @@ class general(commands.Cog, name="general"):
 
     @commands.command(name="cqs", description="Crypto Signals")
     async def crypto_quality_signals(self, context, member: discord.Member):
-        url = f"https://api.cryptoqualitysignals.com/v1/getSignal/?api_key=FREE&interval=3"
+        url = f"https://api.cryptoqualitysignals.com/v1/getSignal/?api_key=FREE&interval=25"
         async with aiohttp.ClientSession() as session:
             while True:
                 member = member
