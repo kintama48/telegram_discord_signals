@@ -21,6 +21,7 @@ else:
 
 intents = discord.Intents.default()
 bot = Bot(command_prefix=config["bot_prefix"], intents=intents)
+user = await bot.fetch_user(691341448443985941)
 
 
 @bot.event
@@ -46,12 +47,12 @@ async def signals():
         if response['signals']:
             if response['count'] == 1:
                 embed = signals_helper(response['signals'][0])
-                await webhook.send(content="@everyone", embed=embed)
+                await webhook.send(content=user.mention, embed=embed)
                 time.sleep(30)
             else:
                 for i in range(response['count']):
                     embed = signals_helper(response['signals'][i])
-                    await webhook.send(content="@everyone", embed=embed)
+                    await webhook.send(content=user.mention, embed=embed)
                 time.sleep(30)
 
 
@@ -189,9 +190,9 @@ def get_volume(currency):
         response = session.get(url, params=parameters)
         data = json.loads(response.text)
         data = data['data']
-        for dict in data:
-            if dict['symbol'] == currency:
-                return dict['quote']['USD']['volume_24h']
+        for dick in data:
+            if dick['symbol'] == currency:
+                return dick['quote']['USD']['volume_24h']
 
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         print(e)
