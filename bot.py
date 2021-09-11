@@ -45,13 +45,15 @@ async def signals():
         print(response)
         if response['signals']:
             if response['count'] == 1:
+                print("count = 1")
                 embed = signals_helper(response['signals'][0])
-                await webhook.send(content=(await bot.fetch_user(691341448443985941)).mention, embed=embed)
+                print(response)
+                await webhook.send(content="@everyone", embed=embed)
                 time.sleep(30)
             else:
-                for i in range(response['count']):
-                    embed = signals_helper(response['signals'][i])
-                    await webhook.send(content=(await bot.fetch_user(691341448443985941)).mention, embed=embed)
+                for i in response['signals']:
+                    embed = signals_helper(i)
+                    webhook.send(content="@everyone", embed=embed)
                 time.sleep(30)
 
 
@@ -85,29 +87,29 @@ def signals_helper(signal):
     embed.add_field(name=chr(173), value=chr(173))
 
     embed.add_field(
-        name=f"🛒 Entry Zone: {round(int(signal['buy_start']), 9)}-{round(int(signal['buy_end']))}",
+        name=f"🛒 Entry Zone: {round(float(signal['buy_start']), 9)}-{round(float(signal['buy_end']), 9)}",
         value=chr(173),
         inline=False
     )
     embed.add_field(
-        name=f"💵 Current ask: {round(int(signal['ask']))}",
+        name=f"💵 Current ask: {round(float(signal['ask']), 9)}",
         value=chr(173),
         inline=False
     )
     embed.add_field(
-        name=f"🎯 Target 1: {round(signal['target1'], 9)} ({round((float(signal['buy_end']) - float(signal['target1'])) / float(signal['buy_end']) * 100, 2) * -1}%)",
+        name=f"🎯 Target 1: {round(float(signal['target1']), 9)} ({round((float(signal['buy_end']) - float(signal['target1'])) / float(signal['buy_end']) * 100, 2) * -1}%)",
         value=chr(173),
         inline=False
     )
     if 'target2' in signal:
         embed.add_field(
-            name=f"🎯 Target 2: {round(signal['target2'], 9)} ({round((float(signal['buy_end']) - float(signal['target2'])) / float(signal['buy_end']) * 100, 2) * -1}%)",
+            name=f"🎯 Target 2: {round(float(signal['target2']), 9)} ({round((float(signal['buy_end']) - float(signal['target2'])) / float(signal['buy_end']) * 100, 2) * -1}%)",
             value=chr(173),
             inline=False
         )
     if 'target3' in signal:
         embed.add_field(
-            name=f"🎯 Target 3: {round(signal['target3'], 9)} ({round(((float(signal['buy_end']) - float(signal['target3'])) / float(signal['buy_end']) * 100), 2) * -1}%)",
+            name=f"🎯 Target 3: {round(float(signal['target3']), 9)} ({round(((float(signal['buy_end']) - float(signal['target3'])) / float(signal['buy_end']) * 100), 2) * -1}%)",
             value=chr(173),
             inline=False
         )
@@ -116,19 +118,19 @@ def signals_helper(signal):
 
     if 'stop_loss' in signal:
         embed.add_field(
-            name=f"🚫 Stop loss: {round(signal['stop_loss'], 9)} ({round(((float(signal['stop_loss']) - float(signal['buy_end'])) / float(signal['buy_end'])) * 100, 2) * -1}%)",
+            name=f"🚫 Stop loss: {round(float(signal['stop_loss']), 9)} ({round(((float(signal['stop_loss']) - float(signal['buy_end'])) / float(signal['buy_end'])) * 100, 2)}%)",
             value=chr(173),
             inline=False
         )
 
     embed.add_field(
-        name=f"💰 Volume #{signal['currency']}: {round(get_volume(signal['currency']), 3)}",
+        name=f"💰 Volume #{signal['currency']}: {get_volume(signal['currency'])}",
         value=chr(173),
         inline=False
     )
 
     embed.add_field(
-        name=f"💰 Volume #{signal['coin']}: {round(get_volume(signal['coin']), 3)}",
+        name=f"💰 Volume #{signal['coin']}: {get_volume(signal['coin'])}",
         value=chr(173),
         inline=False
     )
