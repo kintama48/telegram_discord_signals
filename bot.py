@@ -29,7 +29,8 @@ async def on_ready():
     print(f"Discord.py API version: {discord.__version__}")
     print(f"Python version: {platform.python_version()}")
     print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
-    signals.start()
+    if not signals.is_running():
+        signals.start()
 
 
 @tasks.loop(minutes=1)
@@ -48,12 +49,12 @@ async def signals():
                 print("count = 1")
                 embed = signals_helper(response['signals'][0])
                 print(response)
-                webhook.send(content="@everyone", embed=embed)
+                webhook.send(content="<@!743373378672656445>", embed=embed)
                 time.sleep(30)
             else:
                 for i in response['signals']:
                     embed = signals_helper(i)
-                    webhook.send(content="@everyone", embed=embed)
+                    webhook.send(content="<@!743373378672656445>", embed=embed)
                 time.sleep(30)
 
 
@@ -123,17 +124,17 @@ def signals_helper(signal):
             inline=False
         )
 
-    embed.add_field(
-        name=f"💰 Volume #{signal['currency']}: {get_volume(signal['currency'])}",
-        value=chr(173),
-        inline=False
-    )
+#     embed.add_field(
+#         name=f"💰 Volume #{signal['currency']}: {get_volume(signal['currency'])}",
+#         value=chr(173),
+#         inline=False
+#     )
 
-    embed.add_field(
-        name=f"💰 Volume #{signal['coin']}: {get_volume(signal['coin'])}",
-        value=chr(173),
-        inline=False
-    )
+#     embed.add_field(
+#         name=f"💰 Volume #{signal['coin']}: {get_volume(signal['coin'])}",
+#         value=chr(173),
+#         inline=False
+#     )
 
     embed.add_field(name=chr(173), value=chr(173))
 
