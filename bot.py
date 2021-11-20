@@ -49,12 +49,12 @@ async def signals():
                 print("count = 1")
                 embed = signals_helper(response['signals'][0])
                 print(response)
-                webhook.send(content="<@!743373378672656445>", embed=embed)
+                webhook.send( embed=embed)
                 time.sleep(30)
             else:
                 for i in response['signals']:
                     embed = signals_helper(i)
-                    webhook.send(content="<@!743373378672656445>", embed=embed)
+                    webhook.send( embed=embed)
                 time.sleep(30)
 
 
