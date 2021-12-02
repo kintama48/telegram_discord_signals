@@ -1,6 +1,9 @@
 {
   "bot_prefix": "$",
-  "token": "ODc0NTIyOTgyOTYwMjE4MTMz.YRIM_g.-AqkSl6o0YK1TKCg0aN9AJHDRpU",
+  "discord_token": "ODc0NTIyOTgyOTYwMjE4MTMz.YRIM_g.-AqkSl6o0YK1TKCg0aN9AJHDRpU",
   "application_id": "871878676185247807",
-  "owners": []
+  "telegram_token": "5088097252:AAEAJXXWgqMWtNamV5oRAZvAroEPd9oTMFM",
+  "discord_channel_ids": [905412548768174080],
+  "signals_api_endpoint": "https://api.cryptoqualitysignals.com/v1/getSignal/?api_key=FREE&interval=1",
+  "telegram_channel_id": -730453456
 }
